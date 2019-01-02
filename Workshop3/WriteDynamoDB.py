@@ -21,7 +21,7 @@ table = dynamodb.Table('Workshop3')
 
 response = table.put_item(
     Item={
-        'CustomerID': uuid.uuid4() ,
+        'CustomerID': str(uuid.uuid4()),
         'Age': 25,
         'Name': "Fritz Meier"
     }
