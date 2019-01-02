@@ -3,6 +3,7 @@
 import boto3
 import json
 import decimal
+import uuid
 from boto3.dynamodb.conditions import Key, Attr
 
 class DecimalEncoder(json.JSONEncoder):
@@ -20,6 +21,7 @@ table = dynamodb.Table('Workshop3')
 
 response = table.put_item(
     Item={
+        'CustomerID': uuid.uuid4() ,
         'Age': 25,
         'Name': "Fritz Meier"
     }
