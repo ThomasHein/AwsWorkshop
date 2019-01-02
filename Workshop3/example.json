@@ -1,0 +1,56 @@
+[
+  {
+    "CustomerID": "5c2c6f3cd4db1d94ea747444",
+    "Date": 1414059996,
+    "Age": 35,
+    "Name": "Allen Horn",
+    "Gender": "male",
+    "Company": "VORATAK",
+    "Email": "allenhorn@voratak.com"
+  },
+   {
+    "CustomerID": "5c2c6f3cd4db1d94ea747444",
+    "Date": 1414060000,
+    "Age": 35,
+    "Name": "Allen Horn",
+    "Gender": "male",
+    "Company": "InMediasp GmbH",
+    "Email": "horn@inmediasp.de"
+  },
+  {
+    "CustomerID": "5c2c6f3c86f19a587216510a",
+    "Date": 1420333553,
+    "Age": 29,
+    "Name": "Gertrude Nieves",
+    "Gender": "female",
+    "Company": "ENORMO",
+    "Email": "gertrudenieves@enormo.com"
+  },
+  {
+    "CustomerID": "5c2c6f3c29e7e4bd2778e506",
+    "Date": 1417064229,
+    "Age": 33,
+    "Name": "Holder Hicks",
+    "Gender": "male",
+    "Company": "PROWASTE",
+    "Email": "holderhicks@prowaste.com"
+  },
+  {
+    "CustomerID": "5c2c6f3c049a0c43b7706e7d",
+    "Date": 1414586556,
+    "Age": 34,
+    "Name": "Lou Gordon",
+    "Gender": "female",
+    "Company": "PASTURIA",
+    "Email": "lougordon@pasturia.com"
+  },
+  {
+    "CustomerID": "5c2c6f3c93f074b37e894693",
+    "Date": 1418642835,
+    "Age": 35,
+    "Name": "Frazier Manning",
+    "Gender": "male",
+    "Company": "SYNKGEN",
+    "Email": "fraziermanning@synkgen.com"
+  }
+]

@@ -1,0 +1,116 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "cd9fc4ce-6ad5-423f-b422-70f04cf67d88": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 230,
+                    "y": 240
+                },
+                "z": 0
+            },
+            "c2e4fc08-6291-4404-8966-db23f69f23eb": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 400,
+                    "y": 230
+                },
+                "z": 0,
+                "dependson": [
+                    "cd9fc4ce-6ad5-423f-b422-70f04cf67d88"
+                ]
+            },
+            "477b2aed-c867-4aaf-81c9-9da8c9377460": {
+                "source": {
+                    "id": "c2e4fc08-6291-4404-8966-db23f69f23eb"
+                },
+                "target": {
+                    "id": "cd9fc4ce-6ad5-423f-b422-70f04cf67d88"
+                },
+                "z": 1
+            }
+        }
+    },
+    "Resources": {
+	"InstanceSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Enable SSH access via port 22",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "22",
+                        "ToPort": "22",
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ]
+            }
+        },      
+        "EC2I4FNNG": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+              "InstanceType" : "t1.micro",
+              "KeyName" : "thomasnew",
+              "ImageId" : "ami-01e24be29428c15b2",
+              "IamInstanceProfile" : "EC2ToDynamoDB",
+              "SecurityGroups": [
+                    {
+                        "Ref": "InstanceSecurityGroup"
+                    }
+                ]
+
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "cd9fc4ce-6ad5-423f-b422-70f04cf67d88"
+                }
+            }
+        },
+        "DDBTP2Y2": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName" : "Workshop4",
+              "ProvisionedThroughput" : {
+                "ReadCapacityUnits" : "1",
+                "WriteCapacityUnits" : "1"
+              },
+              "AttributeDefinitions" : [
+		          {
+		            "AttributeName" : "CustomerID",
+		            "AttributeType" : "S"   
+		          },
+		          {
+		            "AttributeName" : "Date",
+		            "AttributeType" : "N"
+		          }
+		        ],
+              "KeySchema" : [
+		          {
+		            "AttributeName" : "CustomerID",
+		            "KeyType" : "HASH"
+		          },
+		          {
+		            "AttributeName" : "Date",
+		            "KeyType" : "RANGE"
+		          }
+		        ]           
+              
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "c2e4fc08-6291-4404-8966-db23f69f23eb"
+                }
+            },
+            "DependsOn": [
+                "EC2I4FNNG"
+            ]
+        }
+    }
+}
