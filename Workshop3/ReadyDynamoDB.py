@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 
@@ -6,11 +8,11 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-2')
 table = dynamodb.Table('Workshop3')
 
 response = table.query(
-    KeyConditionExpression=Key('Age').eq(35)
+    KeyConditionExpression=Key('CustomerID').eq("5c2c6f3cd4db1d94ea747444")
 )
 
 
 print("User Database")
 
 for i in response['Items']:
-    print("Name", ":", i['AGE'])
+    print("Name", ":", i['Name'])
