@@ -1,0 +1,149 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Metadata": {
+        "AWS::CloudFormation::Designer": {
+            "cd9fc4ce-6ad5-423f-b422-70f04cf67d88": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 240,
+                    "y": 240
+                },
+                "z": 1,
+                "embeds": [],
+                "isassociatedwith": [
+                    "87ef9197-0f53-4ba6-b1f4-9edaeb6ba3aa"
+                ]
+            },
+            "c2e4fc08-6291-4404-8966-db23f69f23eb": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 390,
+                    "y": 240
+                },
+                "z": 1,
+                "embeds": [],
+                "dependson": [
+                    "cd9fc4ce-6ad5-423f-b422-70f04cf67d88"
+                ]
+            },
+            "87ef9197-0f53-4ba6-b1f4-9edaeb6ba3aa": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 60,
+                    "y": 90
+                },
+                "z": 1,
+                "embeds": []
+            },
+            "e98ce20e-4158-49a4-bba7-011a065eb1bf": {
+                "size": {
+                    "width": 60,
+                    "height": 60
+                },
+                "position": {
+                    "x": 500,
+                    "y": 140
+                },
+                "z": 0
+            }
+        }
+    },
+    "Resources": {
+        "InstanceSecurityGroup": {
+            "Type": "AWS::EC2::SecurityGroup",
+            "Properties": {
+                "GroupDescription": "Enable SSH access via port 22",
+                "SecurityGroupIngress": [
+                    {
+                        "IpProtocol": "tcp",
+                        "FromPort": "22",
+                        "ToPort": "22",
+                        "CidrIp": "0.0.0.0/0"
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "87ef9197-0f53-4ba6-b1f4-9edaeb6ba3aa"
+                }
+            }
+        },
+        "EC2I4FNNG": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "InstanceType": "t1.micro",
+                "KeyName": "thomasnew",
+                "ImageId": "ami-01e24be29428c15b2",
+                "IamInstanceProfile": "EC2ToDynamoDB",
+                "SecurityGroups": [
+                    {
+                        "Ref": "InstanceSecurityGroup"
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "cd9fc4ce-6ad5-423f-b422-70f04cf67d88"
+                }
+            }
+        },
+        "DDBTP2Y2": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+                "TableName": "Workshop4",
+                "ProvisionedThroughput": {
+                    "ReadCapacityUnits": "1",
+                    "WriteCapacityUnits": "1"
+                },
+                "AttributeDefinitions": [
+                    {
+                        "AttributeName": "CustomerID",
+                        "AttributeType": "S"
+                    },
+                    {
+                        "AttributeName": "Date",
+                        "AttributeType": "N"
+                    }
+                ],
+                "KeySchema": [
+                    {
+                        "AttributeName": "CustomerID",
+                        "KeyType": "HASH"
+                    },
+                    {
+                        "AttributeName": "Date",
+                        "KeyType": "RANGE"
+                    }
+                ]
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "c2e4fc08-6291-4404-8966-db23f69f23eb"
+                }
+            },
+            "DependsOn": [
+                "EC2I4FNNG"
+            ]
+        },
+        "CFS4M8RP": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties" : {
+              "TemplateURL" : "https://s3-us-west-2.amazonaws.com/thomasworkshop4bucket/Workshop4Task2AuroraInclusion.template"
+            },
+            "Metadata": {
+                "AWS::CloudFormation::Designer": {
+                    "id": "e98ce20e-4158-49a4-bba7-011a065eb1bf"
+                }
+            }
+        }
+    }
+}
